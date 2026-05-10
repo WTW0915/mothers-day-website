@@ -18,19 +18,34 @@
             --cream: #fef6e4;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Noto Serif SC', serif;
             background: linear-gradient(135deg, var(--light) 0%, var(--cream) 50%, #fff5f5 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             color: var(--dark);
             overflow-x: hidden;
             min-height: 100vh;
             -webkit-tap-highlight-color: transparent;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .floating-hearts {
@@ -58,6 +73,55 @@
             100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
         }
 
+        /* Aurora background effect */
+        .aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .aurora-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: auroraMove 20s ease-in-out infinite;
+        }
+
+        .aurora-blob:nth-child(1) {
+            width: 300px; height: 300px;
+            background: var(--primary);
+            top: 10%; left: 20%;
+            animation-delay: 0s;
+        }
+
+        .aurora-blob:nth-child(2) {
+            width: 250px; height: 250px;
+            background: var(--accent);
+            top: 40%; right: 10%;
+            animation-delay: -7s;
+        }
+
+        .aurora-blob:nth-child(3) {
+            width: 200px; height: 200px;
+            background: var(--gold);
+            bottom: 20%; left: 30%;
+            animation-delay: -14s;
+        }
+
+        @keyframes auroraMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -30px) scale(1.1); }
+            50% { transform: translate(-30px, 50px) scale(0.9); }
+            75% { transform: translate(30px, 30px) scale(1.05); }
+        }
+
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -73,10 +137,7 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle at 50% 30%, rgba(232, 160, 191, 0.3) 0%, transparent 50%);
             pointer-events: none;
         }
@@ -94,15 +155,24 @@
         .hero h1 {
             font-family: 'Ma Shan Zheng', cursive;
             font-size: clamp(2.5rem, 12vw, 5rem);
-            color: var(--accent);
+            background: linear-gradient(135deg, var(--accent), #ff6b9d, var(--accent), #c2185b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s ease-in-out infinite, shimmer 4s ease-in-out infinite;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            animation: pulse 2s ease-in-out infinite;
         }
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.02); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero-subtitle {
@@ -124,6 +194,25 @@
             margin: 0 auto 3rem;
             opacity: 0;
             animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        .hero-message .typewriter {
+            display: inline;
+        }
+
+        .hero-message .typewriter .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--accent);
+            margin-left: 2px;
+            animation: blink 0.8s step-end infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .scroll-indicator {
@@ -167,6 +256,51 @@
             100% { opacity: 0; top: 30px; }
         }
 
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
         section {
             padding: 4rem 1rem;
             position: relative;
@@ -187,8 +321,16 @@
             display: block;
             font-size: 2rem;
             margin-top: 0.5rem;
+            animation: spinFlower 3s ease-in-out infinite;
         }
 
+        @keyframes spinFlower {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(15deg) scale(1.1); }
+            75% { transform: rotate(-15deg) scale(1.1); }
+        }
+
+        /* Letter */
         .letter-section {
             background: linear-gradient(180deg, transparent 0%, rgba(232, 160, 191, 0.1) 50%, transparent 100%);
         }
@@ -202,6 +344,11 @@
             box-shadow: 0 20px 60px rgba(214, 51, 132, 0.1);
             position: relative;
             transform: rotate(-1deg);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        .letter-container:hover {
+            box-shadow: 0 30px 80px rgba(214, 51, 132, 0.2);
         }
 
         .letter-container::before {
@@ -211,6 +358,12 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 3rem;
+            animation: envelopeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes envelopeFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-8px); }
         }
 
         .letter-content {
@@ -232,6 +385,7 @@
             color: var(--accent);
         }
 
+        /* Games */
         .games-section {
             background: linear-gradient(180deg, var(--cream) 0%, var(--light) 100%);
         }
@@ -253,6 +407,24 @@
             transition: all 0.4s ease;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(214, 51, 132, 0.06) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .game-card:active::before {
+            opacity: 1;
         }
 
         .game-card:active {
@@ -263,6 +435,16 @@
         .game-icon {
             font-size: 3.5rem;
             margin-bottom: 0.8rem;
+            animation: iconBounce 2s ease-in-out infinite;
+        }
+
+        .game-card:nth-child(1) .game-icon { animation-delay: 0s; }
+        .game-card:nth-child(2) .game-icon { animation-delay: 0.3s; }
+        .game-card:nth-child(3) .game-icon { animation-delay: 0.6s; }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         .game-title {
@@ -278,13 +460,12 @@
             line-height: 1.6;
         }
 
+        /* Game Modal */
         .game-modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.85);
             z-index: 1000;
             justify-content: center;
@@ -295,6 +476,12 @@
 
         .game-modal.active {
             display: flex;
+            animation: modalIn 0.3s ease-out;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .game-modal-content {
@@ -306,14 +493,18 @@
             max-height: 85vh;
             overflow-y: auto;
             position: relative;
+            animation: contentSlideUp 0.4s ease-out;
+        }
+
+        @keyframes contentSlideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .close-modal {
             position: absolute;
-            top: 0.8rem;
-            right: 0.8rem;
-            width: 36px;
-            height: 36px;
+            top: 0.8rem; right: 0.8rem;
+            width: 36px; height: 36px;
             border: none;
             background: var(--light);
             border-radius: 50%;
@@ -342,7 +533,7 @@
             padding: 1.5rem 1rem;
         }
 
-        /* Memory Game - Fixed with proper 3D flip */
+        /* Memory Game */
         .memory-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -362,8 +553,7 @@
 
         .memory-card .card-face {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -375,6 +565,12 @@
         .memory-card .card-back {
             background: linear-gradient(135deg, var(--primary), var(--accent));
             font-size: 1.6rem;
+            animation: cardGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes cardGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(214, 51, 132, 0.2); }
+            50% { box-shadow: 0 0 15px rgba(214, 51, 132, 0.4); }
         }
 
         .memory-card .card-front {
@@ -384,16 +580,17 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
-        .memory-card.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .memory-card.matched {
-            cursor: default;
-        }
-
+        .memory-card.flipped { transform: rotateY(180deg); }
+        .memory-card.matched { cursor: default; }
         .memory-card.matched .card-front {
             background: linear-gradient(135deg, #a8e6cf, #88d8b0);
+            animation: matchPop 0.5s ease-out;
+        }
+
+        @keyframes matchPop {
+            0% { transform: rotateY(180deg) scale(1); }
+            50% { transform: rotateY(180deg) scale(1.15); }
+            100% { transform: rotateY(180deg) scale(1); }
         }
 
         .game-score {
@@ -404,6 +601,8 @@
 
         .game-btn {
             background: linear-gradient(135deg, var(--primary), var(--accent));
+            background-size: 200% 200%;
+            animation: btnShimmer 3s ease-in-out infinite;
             color: white;
             border: none;
             padding: 0.8rem 1.8rem;
@@ -415,11 +614,15 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .game-btn:active {
-            transform: scale(0.95);
+        @keyframes btnShimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        /* Heart Catcher Game */
+        .game-btn:active { transform: scale(0.95); }
+
+        /* Heart Catcher */
         #heart-game-canvas {
             border-radius: 16px;
             max-width: 100%;
@@ -438,7 +641,7 @@
             font-size: 0.85rem;
         }
 
-        /* Flower Planting Game */
+        /* Flower Game */
         .flower-game-area {
             display: flex;
             flex-wrap: wrap;
@@ -461,17 +664,13 @@
         .flower-pot::before {
             content: '';
             position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
+            top: -4px; left: -4px; right: -4px;
             height: 13px;
             background: #a0522d;
             border-radius: 5px;
         }
 
-        .flower-pot:active {
-            transform: scale(0.9);
-        }
+        .flower-pot:active { transform: scale(0.9); }
 
         .flower {
             position: absolute;
@@ -479,12 +678,13 @@
             left: 50%;
             transform: translateX(-50%);
             font-size: 2.2rem;
-            animation: growFlower 0.5s ease-out;
+            animation: growFlower 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes growFlower {
-            from { transform: translateX(-50%) scale(0); }
-            to { transform: translateX(-50%) scale(1); }
+            0% { transform: translateX(-50%) scale(0) rotate(-20deg); }
+            60% { transform: translateX(-50%) scale(1.2) rotate(5deg); }
+            100% { transform: translateX(-50%) scale(1) rotate(0deg); }
         }
 
         .flower-buttons {
@@ -517,6 +717,7 @@
             font-size: 1rem;
         }
 
+        /* Wishes */
         .wishes-section {
             background: linear-gradient(180deg, var(--light) 0%, var(--cream) 100%);
         }
@@ -538,26 +739,31 @@
             transition: all 0.3s;
             opacity: 0;
             transform: translateX(-30px);
-            animation: slideIn 0.6s ease-out forwards;
         }
 
-        .wish-item:nth-child(1) { animation-delay: 0.1s; }
-        .wish-item:nth-child(2) { animation-delay: 0.2s; }
-        .wish-item:nth-child(3) { animation-delay: 0.3s; }
-        .wish-item:nth-child(4) { animation-delay: 0.4s; }
-        .wish-item:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes slideIn {
-            to { opacity: 1; transform: translateX(0); }
+        .wish-item.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
-        .wish-item:active {
-            transform: scale(0.98);
-        }
+        .wish-item:active { transform: scale(0.98); }
 
         .wish-emoji {
             font-size: 2.5rem;
             flex-shrink: 0;
+            animation: emojiWiggle 2s ease-in-out infinite;
+        }
+
+        .wish-item:nth-child(1) .wish-emoji { animation-delay: 0s; }
+        .wish-item:nth-child(2) .wish-emoji { animation-delay: 0.4s; }
+        .wish-item:nth-child(3) .wish-emoji { animation-delay: 0.8s; }
+        .wish-item:nth-child(4) .wish-emoji { animation-delay: 1.2s; }
+        .wish-item:nth-child(5) .wish-emoji { animation-delay: 1.6s; }
+
+        @keyframes emojiWiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            75% { transform: rotate(-10deg); }
         }
 
         .wish-text {
@@ -566,6 +772,7 @@
             color: #555;
         }
 
+        /* Footer */
         footer {
             background: linear-gradient(135deg, var(--dark) 0%, #2a1a2a 100%);
             color: white;
@@ -598,20 +805,20 @@
             50% { transform: scale(1.2); }
         }
 
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .letter-container { padding: 1.5rem 1rem; transform: rotate(0); }
-            .memory-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-            .wish-item { flex-direction: row; }
-            section { padding: 3rem 1rem; }
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            animation: confettiFall 3s ease-out forwards;
         }
 
-        @media (max-width: 380px) {
-            .memory-grid { gap: 4px; }
-            .flower-pot { width: 58px; height: 72px; }
-            .flower { font-size: 1.8rem; bottom: 14px; }
+        @keyframes confettiFall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
 
+        /* Sparkle on click */
         .sparkle {
             position: fixed;
             pointer-events: none;
@@ -625,9 +832,34 @@
             50% { opacity: 1; transform: scale(1) rotate(180deg); }
             100% { opacity: 0; transform: scale(0) rotate(360deg); }
         }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .letter-container { padding: 1.5rem 1rem; transform: rotate(0); }
+            .memory-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+            section { padding: 3rem 1rem; }
+        }
+
+        @media (max-width: 380px) {
+            .memory-grid { gap: 4px; }
+            .flower-pot { width: 58px; height: 72px; }
+            .flower { font-size: 1.8rem; bottom: 14px; }
+        }
     </style>
 </head>
 <body>
+    <!-- Aurora Background -->
+    <div class="aurora">
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Floating Hearts -->
     <div class="floating-hearts" id="floatingHearts"></div>
 
     <!-- Hero Section -->
@@ -635,12 +867,7 @@
         <div class="hero-content">
             <h1>妈妈，母亲节快乐！</h1>
             <p class="hero-subtitle">世界上最美的女人，我最爱的人 ❤️</p>
-            <p class="hero-message">
-                亲爱的妈妈，今天是母亲节。<br>
-                感谢您一直以来的无私付出和爱。<br>
-                您是我生命中最重要的人，是我永远的港湾。<br>
-                妈妈，我爱您！
-            </p>
+            <p class="hero-message" id="heroMessage"></p>
         </div>
         <div class="scroll-indicator">
             <span></span>
@@ -649,8 +876,8 @@
 
     <!-- Love Letter Section -->
     <section class="letter-section">
-        <h2 class="section-title">给妈妈的一封信</h2>
-        <div class="letter-container">
+        <h2 class="section-title reveal">给妈妈的一封信</h2>
+        <div class="letter-container reveal">
             <div class="letter-content">
                 <p>亲爱的妈妈：</p>
                 <p>当我提笔写这封信的时候，心中有太多话想说，却又不知从何说起。</p>
@@ -669,19 +896,19 @@
 
     <!-- Games Section -->
     <section class="games-section">
-        <h2 class="section-title">和妈妈一起玩</h2>
+        <h2 class="section-title reveal">和妈妈一起玩</h2>
         <div class="games-container">
-            <div class="game-card" onclick="openGame('memory')">
+            <div class="game-card reveal-left" onclick="openGame('memory')">
                 <div class="game-icon">🧠</div>
                 <h3 class="game-title">记忆翻牌</h3>
                 <p class="game-desc">考验记忆力的时刻到了！点击翻开相同的卡片配对成功！</p>
             </div>
-            <div class="game-card" onclick="openGame('heart')">
+            <div class="game-card reveal" onclick="openGame('heart')">
                 <div class="game-icon">💕</div>
                 <h3 class="game-title">爱心接接乐</h3>
                 <p class="game-desc">左右滑动屏幕接住掉落的爱心，获得更高的分数吧！</p>
             </div>
-            <div class="game-card" onclick="openGame('flower')">
+            <div class="game-card reveal-right" onclick="openGame('flower')">
                 <div class="game-icon">🌷</div>
                 <h3 class="game-title">种植花园</h3>
                 <p class="game-desc">点击花盆种下不同的花朵，为妈妈打造一个美丽的花园！</p>
@@ -691,7 +918,7 @@
 
     <!-- Wishes Section -->
     <section class="wishes-section">
-        <h2 class="section-title">妈妈的祝福</h2>
+        <h2 class="section-title reveal">妈妈的祝福</h2>
         <div class="wishes-container">
             <div class="wish-item">
                 <div class="wish-emoji">🌟</div>
@@ -740,7 +967,6 @@
     </footer>
 
     <!-- Game Modals -->
-    <!-- Memory Game Modal -->
     <div class="game-modal" id="memory-modal">
         <div class="game-modal-content">
             <button class="close-modal" onclick="closeGame('memory')">×</button>
@@ -753,7 +979,6 @@
         </div>
     </div>
 
-    <!-- Heart Catcher Game Modal -->
     <div class="game-modal" id="heart-modal">
         <div class="game-modal-content">
             <button class="close-modal" onclick="closeGame('heart')">×</button>
@@ -767,7 +992,6 @@
         </div>
     </div>
 
-    <!-- Flower Planting Game Modal -->
     <div class="game-modal" id="flower-modal">
         <div class="game-modal-content">
             <button class="close-modal" onclick="closeGame('flower')">×</button>
@@ -790,6 +1014,79 @@
     </div>
 
     <script>
+        // ===== Particle System =====
+        const pCanvas = document.getElementById('particle-canvas');
+        const pCtx = pCanvas.getContext('2d');
+        let particles = [];
+
+        function resizeParticleCanvas() {
+            pCanvas.width = window.innerWidth;
+            pCanvas.height = window.innerHeight;
+        }
+        resizeParticleCanvas();
+        window.addEventListener('resize', resizeParticleCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * pCanvas.width;
+                this.y = Math.random() * pCanvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.color = ['rgba(214,51,132,', 'rgba(232,160,191,', 'rgba(245,198,214,', 'rgba(212,165,116,'][Math.floor(Math.random() * 4)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.opacity += (Math.random() - 0.5) * 0.02;
+                this.opacity = Math.max(0.05, Math.min(0.6, this.opacity));
+                if (this.x < 0 || this.x > pCanvas.width || this.y < 0 || this.y > pCanvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                pCtx.beginPath();
+                pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                pCtx.fillStyle = this.color + this.opacity + ')';
+                pCtx.fill();
+            }
+        }
+
+        for (let i = 0; i < 50; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        pCtx.beginPath();
+                        pCtx.strokeStyle = 'rgba(214,51,132,' + (0.08 * (1 - dist / 120)) + ')';
+                        pCtx.lineWidth = 0.5;
+                        pCtx.moveTo(particles[i].x, particles[i].y);
+                        pCtx.lineTo(particles[j].x, particles[j].y);
+                        pCtx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // ===== Floating Hearts =====
         function createFloatingHearts() {
             const container = document.getElementById('floatingHearts');
             const hearts = ['❤️', '💕', '💖', '💗', '💝', '💘', '💓'];
@@ -805,6 +1102,73 @@
         }
         createFloatingHearts();
 
+        // ===== Typewriter Effect =====
+        const heroLines = [
+            '亲爱的妈妈，今天是母亲节。',
+            '感谢您一直以来的无私付出和爱。',
+            '您是我生命中最重要的人，是我永远的港湾。',
+            '妈妈，我爱您！'
+        ];
+        let lineIdx = 0, charIdx = 0, currentHTML = '';
+        const heroMsg = document.getElementById('heroMessage');
+
+        function typeWriter() {
+            if (lineIdx >= heroLines.length) return;
+            if (charIdx === 0) currentHTML += '<span class="typewriter">';
+            if (charIdx < heroLines[lineIdx].length) {
+                currentHTML += heroLines[lineIdx].charAt(charIdx);
+                heroMsg.innerHTML = currentHTML + '<span class="cursor"></span></span>';
+                charIdx++;
+                setTimeout(typeWriter, 80 + Math.random() * 40);
+            } else {
+                currentHTML += '</span><br>';
+                lineIdx++;
+                charIdx = 0;
+                if (lineIdx < heroLines.length) {
+                    setTimeout(typeWriter, 400);
+                } else {
+                    heroMsg.innerHTML = currentHTML;
+                    heroMsg.style.opacity = '1';
+                }
+            }
+        }
+        setTimeout(typeWriter, 1500);
+
+        // ===== Scroll Reveal =====
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 150);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .wish-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== Confetti =====
+        function launchConfetti() {
+            const colors = ['#d63384', '#e8a0bf', '#f5c6d6', '#d4a574', '#ff6b9d', '#a8e6cf'];
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.width = (Math.random() * 8 + 4) + 'px';
+                confetti.style.height = (Math.random() * 8 + 4) + 'px';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // ===== Click Sparkle =====
         document.addEventListener('click', function(e) {
             const sparkle = document.createElement('div');
             sparkle.className = 'sparkle';
@@ -815,12 +1179,11 @@
             setTimeout(() => sparkle.remove(), 1000);
         });
 
-        // ===== Memory Game (Fixed 3D flip) =====
+        // ===== Memory Game =====
         let flippedCards = [];
         let matchedPairs = 0;
         let memoryTimer = null;
         let memorySeconds = 0;
-
         const memoryEmojis = ['🌸', '🌺', '🌻', '🌷', '💐', '🌹', '🌼', '🍀'];
 
         function initMemoryGame() {
@@ -829,10 +1192,8 @@
             matchedPairs = 0;
             memorySeconds = 0;
             flippedCards = [];
-
             document.getElementById('memory-matches').textContent = '0';
             document.getElementById('memory-time').textContent = '0';
-
             if (memoryTimer) { clearInterval(memoryTimer); memoryTimer = null; }
 
             const cards = [...memoryEmojis, ...memoryEmojis];
@@ -843,9 +1204,7 @@
                 card.className = 'memory-card';
                 card.dataset.emoji = emoji;
                 card.dataset.index = index;
-                card.innerHTML =
-                    '<div class="card-face card-back">❓</div>' +
-                    '<div class="card-face card-front">' + emoji + '</div>';
+                card.innerHTML = '<div class="card-face card-back">❓</div><div class="card-face card-front">' + emoji + '</div>';
                 card.onclick = () => flipCard(card);
                 grid.appendChild(card);
             });
@@ -857,28 +1216,24 @@
         }
 
         function flipCard(card) {
-            if (flippedCards.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
-                return;
-            }
-
+            if (flippedCards.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) return;
             card.classList.add('flipped');
             flippedCards.push(card);
 
             if (flippedCards.length === 2) {
                 const [card1, card2] = flippedCards;
-
                 if (card1.dataset.emoji === card2.dataset.emoji) {
                     card1.classList.add('matched');
                     card2.classList.add('matched');
                     matchedPairs++;
                     document.getElementById('memory-matches').textContent = matchedPairs;
                     flippedCards = [];
-
                     if (matchedPairs === 8) {
                         clearInterval(memoryTimer);
+                        launchConfetti();
                         setTimeout(() => {
                             alert('🎉 恭喜！你用时 ' + memorySeconds + ' 秒完成了游戏！\n\n妈妈，我爱您！❤️');
-                        }, 300);
+                        }, 500);
                     }
                 } else {
                     setTimeout(() => {
@@ -890,7 +1245,7 @@
             }
         }
 
-        // ===== Heart Catcher Game (Fixed timer) =====
+        // ===== Heart Catcher Game =====
         let heartGameInterval = null;
         let heartCountdownInterval = null;
         let heartScore = 0;
@@ -907,21 +1262,11 @@
             hearts = [];
             catcherX = canvas.width / 2 - 30;
             gameRunning = true;
-
             document.getElementById('heart-score').textContent = '0';
             document.getElementById('heart-time').textContent = '30';
 
-            // Touch events for mobile
-            canvas.ontouchstart = (e) => {
-                e.preventDefault();
-                handleTouch(e.touches[0].clientX);
-            };
-            canvas.ontouchmove = (e) => {
-                e.preventDefault();
-                handleTouch(e.touches[0].clientX);
-            };
-
-            // Mouse fallback
+            canvas.ontouchstart = (e) => { e.preventDefault(); handleTouch(e.touches[0].clientX); };
+            canvas.ontouchmove = (e) => { e.preventDefault(); handleTouch(e.touches[0].clientX); };
             canvas.onmousemove = (e) => {
                 const rect = canvas.getBoundingClientRect();
                 catcherX = e.clientX - rect.left - 30;
@@ -940,14 +1285,11 @@
             heartCountdownInterval = setInterval(() => {
                 heartTimeLeft--;
                 document.getElementById('heart-time').textContent = heartTimeLeft;
-                if (heartTimeLeft <= 0) {
-                    endHeartGame();
-                }
+                if (heartTimeLeft <= 0) endHeartGame();
             }, 1000);
 
             heartGameInterval = setInterval(() => {
                 if (!gameRunning) return;
-
                 if (Math.random() < 0.35) {
                     hearts.push({
                         x: Math.random() * (canvas.width - 40) + 5,
@@ -962,20 +1304,14 @@
                 for (let i = hearts.length - 1; i >= 0; i--) {
                     const heart = hearts[i];
                     heart.y += heart.speed;
-
                     ctx.font = '22px Arial';
                     ctx.textAlign = 'center';
                     ctx.fillText(heart.emoji, heart.x + 12, heart.y);
 
-                    if (heart.y > canvas.height + 10) {
-                        hearts.splice(i, 1);
-                        continue;
-                    }
+                    if (heart.y > canvas.height + 10) { hearts.splice(i, 1); continue; }
 
-                    if (heart.y > canvas.height - 45 &&
-                        heart.y < canvas.height - 5 &&
-                        heart.x + 12 > catcherX - 5 &&
-                        heart.x + 12 < catcherX + 65) {
+                    if (heart.y > canvas.height - 45 && heart.y < canvas.height - 5 &&
+                        heart.x + 12 > catcherX - 5 && heart.x + 12 < catcherX + 65) {
                         heartScore++;
                         document.getElementById('heart-score').textContent = heartScore;
                         hearts.splice(i, 1);
@@ -993,6 +1329,7 @@
             clearInterval(heartGameInterval);
             clearInterval(heartCountdownInterval);
             gameRunning = false;
+            if (heartScore >= 10) launchConfetti();
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.font = '22px "Ma Shan Zheng"';
             ctx.fillStyle = '#d63384';
@@ -1004,7 +1341,7 @@
             ctx.fillText('妈妈，我爱您！❤️', canvas.width / 2, canvas.height / 2 + 50);
         }
 
-        // ===== Flower Planting Game =====
+        // ===== Flower Game =====
         let selectedFlower = '🌷';
         let flowerCount = 0;
         const pots = 9;
@@ -1014,7 +1351,6 @@
             area.innerHTML = '';
             flowerCount = 0;
             document.getElementById('flower-count').textContent = '0';
-
             for (let i = 0; i < pots; i++) {
                 const pot = document.createElement('div');
                 pot.className = 'flower-pot';
@@ -1033,19 +1369,17 @@
 
         function plantFlower(pot) {
             if (pot.querySelector('.flower')) return;
-
             const flower = document.createElement('div');
             flower.className = 'flower';
             flower.textContent = selectedFlower;
             pot.appendChild(flower);
-
             flowerCount++;
             document.getElementById('flower-count').textContent = flowerCount;
-
             if (flowerCount === pots) {
+                launchConfetti();
                 setTimeout(() => {
                     alert('🌷🌸🌹🌻🌺💐 花园种满啦！\n\n这是送给妈妈的最美花园！\n\n妈妈，我爱您！❤️');
-                }, 500);
+                }, 600);
             }
         }
 
@@ -1057,18 +1391,12 @@
         // ===== Modal Functions =====
         function openGame(game) {
             document.getElementById(game + '-modal').classList.add('active');
-
-            if (game === 'memory') {
-                initMemoryGame();
-            } else if (game === 'flower') {
-                initFlowerGarden();
-                selectFlower('🌷');
-            }
+            if (game === 'memory') initMemoryGame();
+            else if (game === 'flower') { initFlowerGarden(); selectFlower('🌷'); }
         }
 
         function closeGame(game) {
             document.getElementById(game + '-modal').classList.remove('active');
-
             if (game === 'heart' && heartGameInterval) {
                 clearInterval(heartGameInterval);
                 clearInterval(heartCountdownInterval);
@@ -1083,13 +1411,6 @@
                     if (heartGameInterval) { clearInterval(heartGameInterval); clearInterval(heartCountdownInterval); }
                 }
             };
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
         });
     </script>
 </body>
