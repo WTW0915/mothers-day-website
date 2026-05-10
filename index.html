@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>母亲节快乐 ❤️ 妈妈我爱你</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #e8a0bf;
+            --secondary: #f5c6d6;
+            --accent: #d63384;
+            --dark: #4a2c4a;
+            --light: #fff5f8;
+            --gold: #d4a574;
+            --cream: #fef6e4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, var(--light) 0%, var(--cream) 50%, #fff5f5 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatHeart 8s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatHeart {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 30%, rgba(232, 160, 191, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: clamp(3rem, 10vw, 6rem);
+            color: var(--accent);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .hero-subtitle {
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--dark);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .hero-message {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        .hero-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid white;
+            box-shadow: 0 10px 40px rgba(214, 51, 132, 0.2);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards, float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--accent);
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollDot 2s infinite;
+        }
+
+        @keyframes scrollDot {
+            0% {
+                opacity: 1;
+                top: 10px;
+            }
+            100% {
+                opacity: 0;
+                top: 30px;
+            }
+        }
+
+        section {
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '🌸';
+            display: block;
+            font-size: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .letter-section {
+            background: linear-gradient(180deg, transparent 0%, rgba(232, 160, 191, 0.1) 50%, transparent 100%);
+        }
+
+        .letter-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(214, 51, 132, 0.1);
+            position: relative;
+            transform: rotate(-1deg);
+        }
+
+        .letter-container::before {
+            content: '💌';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+        }
+
+        .letter-content {
+            font-size: 1.1rem;
+            line-height: 2.2;
+            color: #555;
+        }
+
+        .letter-content p {
+            margin-bottom: 1.5rem;
+            text-indent: 2em;
+        }
+
+        .letter-signature {
+            text-align: right;
+            margin-top: 2rem;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.8rem;
+            color: var(--accent);
+        }
+
+        .gallery-section {
+            background: var(--cream);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover .overlay {
+            transform: translateY(0);
+        }
+
+        .games-section {
+            background: linear-gradient(180deg, var(--cream) 0%, var(--light) 100%);
+        }
+
+        .games-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(214, 51, 132, 0.2);
+        }
+
+        .game-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .game-title {
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .game-desc {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .game-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .game-modal.active {
+            display: flex;
+        }
+
+        .game-modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--light);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            background: var(--accent);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .game-area {
+            margin-top: 1.5rem;
+            min-height: 300px;
+            background: var(--light);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 400px;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card.matched {
+            background: linear-gradient(135deg, #a8e6cf, #88d8b0);
+            cursor: default;
+        }
+
+        .memory-card .back {
+            font-size: 1.5rem;
+        }
+
+        .memory-card .front {
+            font-size: 2.5rem;
+            transform: rotateY(180deg);
+        }
+
+        .game-score {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .game-btn {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .game-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.3);
+        }
+
+        #heart-game-canvas {
+            border-radius: 16px;
+            max-width: 100%;
+        }
+
+        .heart-game-score {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .heart-game-instructions {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .flower-game-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-width: 400px;
+        }
+
+        .flower-pot {
+            width: 70px;
+            height: 90px;
+            background: linear-gradient(180deg, #8B4513 0%, #654321 100%);
+            border-radius: 0 0 20px 20px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .flower-pot::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            height: 15px;
+            background: #a0522d;
+            border-radius: 5px;
+        }
+
+        .flower-pot:hover {
+            transform: scale(1.1);
+        }
+
+        .flower {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            animation: growFlower 0.5s ease-out;
+        }
+
+        @keyframes growFlower {
+            from {
+                transform: translateX(-50%) scale(0);
+            }
+            to {
+                transform: translateX(-50%) scale(1);
+            }
+        }
+
+        .flower-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .flower-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--accent);
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .flower-btn:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .flower-count {
+            margin-top: 1rem;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .wishes-section {
+            background: linear-gradient(180deg, var(--light) 0%, var(--cream) 100%);
+        }
+
+        .wishes-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .wish-item {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .wish-item:nth-child(1) { animation-delay: 0.1s; }
+        .wish-item:nth-child(2) { animation-delay: 0.2s; }
+        .wish-item:nth-child(3) { animation-delay: 0.3s; }
+        .wish-item:nth-child(4) { animation-delay: 0.4s; }
+        .wish-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .wish-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.15);
+        }
+
+        .wish-emoji {
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+
+        .wish-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a1a2a 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        footer h3 {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        .footer-hearts {
+            margin-top: 2rem;
+            font-size: 2rem;
+            animation: heartBeat 1s ease-in-out infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .letter-container {
+                padding: 2rem;
+                transform: rotate(0);
+            }
+
+            .memory-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .wish-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 20px;
+            animation: sparkle 1s ease-out forwards;
+            z-index: 999;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 1;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face" alt="妈妈的照片" class="hero-photo">
+            <h1>妈妈，母亲节快乐！</h1>
+            <p class="hero-subtitle">世界上最美的女人，我最爱的人 ❤️</p>
+            <p class="hero-message">
+                亲爱的妈妈，今天是母亲节。<br>
+                感谢您一直以来的无私付出和爱。<br>
+                您是我生命中最重要的人，是我永远的港湾。<br>
+                妈妈，我爱您！
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <section class="letter-section">
+        <h2 class="section-title">给妈妈的一封信</h2>
+        <div class="letter-container">
+            <div class="letter-content">
+                <p>亲爱的妈妈：</p>
+                <p>当我提笔写这封信的时候，心中有太多话想说，却又不知从何说起。</p>
+                <p>妈妈，您辛苦了！从我还是个小婴儿开始，您就日夜操劳，照顾我的饮食起居，关心我的学习和成长。每当我生病时，您彻夜未眠地守护我；每当我取得成绩时，您比我还开心；每当我遇到困难时，您总是第一个给我鼓励和力量。</p>
+                <p>您教会我走路、说话、做人，您用您的一言一行影响着我。您常说做人要善良、诚实、努力，我一直记在心里。</p>
+                <p>妈妈，现在我慢慢长大了，我想对您说：您不用再为我操太多心了，我会好好照顾自己，也会好好孝顺您。希望您能多为自己考虑，多休息，多开心。</p>
+                <p>在这个特别的日子里，我想大声对您说：妈妈，您辛苦了！我爱您！永远爱您！</p>
+                <p>祝您母亲节快乐，天天开心，健康幸福！</p>
+            </div>
+            <div class="letter-signature">
+                永远爱您的儿子<br>
+                2026年母亲节
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <h2 class="section-title">我们的回忆</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=500&h=500&fit=crop" alt="温馨时刻">
+                <div class="overlay">小时候的我们</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1491013516836-7db643ee125a?w=500&h=500&fit=crop" alt="美好时光">
+                <div class="overlay">一起做饭的午后</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=500&h=500&fit=crop" alt="幸福时刻">
+                <div class="overlay">温暖的拥抱</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=500&h=500&fit=crop" alt="快乐时光">
+                <div class="overlay">快乐的旅行</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="games-section">
+        <h2 class="section-title">和妈妈一起玩</h2>
+        <div class="games-container">
+            <div class="game-card" onclick="openGame('memory')">
+                <div class="game-icon">🧠</div>
+                <h3 class="game-title">记忆翻牌</h3>
+                <p class="game-desc">考验记忆力的时刻到了！翻开相同的卡片，享受亲子游戏的乐趣。</p>
+            </div>
+            <div class="game-card" onclick="openGame('heart')">
+                <div class="game-icon">💕</div>
+                <h3 class="game-title">爱心接接乐</h3>
+                <p class="game-desc">用鼠标或手指接住掉落的爱心，获得更高的分数吧！</p>
+            </div>
+            <div class="game-card" onclick="openGame('flower')">
+                <div class="game-icon">🌷</div>
+                <h3 class="game-title">种植花园</h3>
+                <p class="game-desc">点击花盆种下不同的花朵，为妈妈打造一个美丽的花园！</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="wishes-section">
+        <h2 class="section-title">妈妈的祝福</h2>
+        <div class="wishes-container">
+            <div class="wish-item">
+                <div class="wish-emoji">🌟</div>
+                <div class="wish-text">
+                    <strong>健康祝福</strong><br>
+                    妈妈，感谢您一直以来的照顾。祝您身体健康，每天都充满活力！
+                </div>
+            </div>
+            <div class="wish-item">
+                <div class="wish-emoji">😊</div>
+                <div class="wish-text">
+                    <strong>快乐祝福</strong><br>
+                    希望妈妈每天都能开心快乐，笑口常开，幸福美满！
+                </div>
+            </div>
+            <div class="wish-item">
+                <div class="wish-emoji">🌸</div>
+                <div class="wish-text">
+                    <strong>美丽祝福</strong><br>
+                    妈妈永远是最美的！祝您青春永驻，魅力四射！
+                </div>
+            </div>
+            <div class="wish-item">
+                <div class="wish-emoji">💪</div>
+                <div class="wish-text">
+                    <strong>力量祝福</strong><br>
+                    妈妈，您是我见过最坚强的人！愿您永远充满力量！
+                </div>
+            </div>
+            <div class="wish-item">
+                <div class="wish-emoji">❤️</div>
+                <div class="wish-text">
+                    <strong>爱意祝福</strong><br>
+                    妈妈，我爱您！这份爱永远不变，永永远远都爱您！
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h3>妈妈，我爱您！</h3>
+        <p>感谢您给予我生命，感谢您无私的爱</p>
+        <p>愿您每一天都像母亲节一样幸福快乐</p>
+        <div class="footer-hearts">❤️ 💖 💝 💕 💗</div>
+    </footer>
+
+    <div class="game-modal" id="memory-modal">
+        <div class="game-modal-content">
+            <button class="close-modal" onclick="closeGame('memory')">×</button>
+            <h2 style="font-family: 'Ma Shan Zheng', cursive; color: var(--accent); font-size: 2rem;">🧠 记忆翻牌</h2>
+            <div class="game-score">用时：<span id="memory-time">0</span>秒 | 配对：<span id="memory-matches">0</span>/8</div>
+            <div class="game-area">
+                <div class="memory-grid" id="memory-grid"></div>
+            </div>
+            <button class="game-btn" onclick="initMemoryGame()">重新开始</button>
+        </div>
+    </div>
+
+    <div class="game-modal" id="heart-modal">
+        <div class="game-modal-content">
+            <button class="close-modal" onclick="closeGame('heart')">×</button>
+            <h2 style="font-family: 'Ma Shan Zheng', cursive; color: var(--accent); font-size: 2rem;">💕 爱心接接乐</h2>
+            <div class="heart-game-score">得分：<span id="heart-score">0</span> | 时间：<span id="heart-time">30</span>秒</div>
+            <p class="heart-game-instructions">用鼠标左右移动，接住掉落的爱心 ❤️</p>
+            <div class="game-area">
+                <canvas id="heart-game-canvas" width="400" height="300"></canvas>
+            </div>
+            <button class="game-btn" onclick="startHeartGame()">开始游戏</button>
+        </div>
+    </div>
+
+    <div class="game-modal" id="flower-modal">
+        <div class="game-modal-content">
+            <button class="close-modal" onclick="closeGame('flower')">×</button>
+            <h2 style="font-family: 'Ma Shan Zheng', cursive; color: var(--accent); font-size: 2rem;">🌷 种植花园</h2>
+            <p style="color: #666; margin-bottom: 1rem;">选择喜欢的花朵，点击花盆种植！</p>
+            <div class="game-area">
+                <div class="flower-game-area" id="flower-area"></div>
+            </div>
+            <div class="flower-buttons">
+                <button class="flower-btn" onclick="selectFlower('🌷')">🌷</button>
+                <button class="flower-btn" onclick="selectFlower('🌸')">🌸</button>
+                <button class="flower-btn" onclick="selectFlower('🌹')">🌹</button>
+                <button class="flower-btn" onclick="selectFlower('🌻')">🌻</button>
+                <button class="flower-btn" onclick="selectFlower('🌺')">🌺</button>
+                <button class="flower-btn" onclick="selectFlower('💐')">💐</button>
+            </div>
+            <div class="flower-count">已种植：<span id="flower-count">0</span> 朵花</div>
+            <button class="game-btn" onclick="resetGarden()">重新开始</button>
+        </div>
+    </div>
+
+    <script>
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '💘', '💓'];
+
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.animationDuration = (6 + Math.random() * 4) + 's';
+                container.appendChild(heart);
+            }
+        }
+        createFloatingHearts();
+
+        document.addEventListener('click', function(e) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.textContent = ['✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 4)];
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
+        });
+
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let memoryTimer = null;
+        let memorySeconds = 0;
+
+        const memoryEmojis = ['🌸', '🌺', '🌻', '🌷', '💐', '🌹', '🌼', '🍀'];
+
+        function initMemoryGame() {
+            const grid = document.getElementById('memory-grid');
+            grid.innerHTML = '';
+            matchedPairs = 0;
+            memorySeconds = 0;
+            flippedCards = [];
+
+            document.getElementById('memory-matches').textContent = '0';
+            document.getElementById('memory-time').textContent = '0';
+
+            if (memoryTimer) {
+                clearInterval(memoryTimer);
+                memoryTimer = null;
+            }
+
+            const cards = [...memoryEmojis, ...memoryEmojis];
+            cards.sort(() => Math.random() - 0.5);
+
+            cards.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.emoji = emoji;
+                card.dataset.index = index;
+                card.innerHTML = `<span class="back">🎴</span><span class="front">${emoji}</span>`;
+                card.onclick = () => flipCard(card);
+                grid.appendChild(card);
+            });
+
+            memoryTimer = setInterval(() => {
+                memorySeconds++;
+                document.getElementById('memory-time').textContent = memorySeconds;
+            }, 1000);
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
+                return;
+            }
+
+            card.classList.add('flipped');
+            flippedCards.push(card);
+
+            if (flippedCards.length === 2) {
+                const [card1, card2] = flippedCards;
+
+                if (card1.dataset.emoji === card2.dataset.emoji) {
+                    card1.classList.add('matched');
+                    card2.classList.add('matched');
+                    matchedPairs++;
+                    document.getElementById('memory-matches').textContent = matchedPairs;
+                    flippedCards = [];
+
+                    if (matchedPairs === 8) {
+                        clearInterval(memoryTimer);
+                        setTimeout(() => {
+                            alert('🎉 恭喜！你用时 ' + memorySeconds + ' 秒完成了游戏！\n\n妈妈，我爱您！❤️');
+                        }, 300);
+                    }
+                } else {
+                    setTimeout(() => {
+                        card1.classList.remove('flipped');
+                        card2.classList.remove('flipped');
+                        flippedCards = [];
+                    }, 800);
+                }
+            }
+        }
+
+        let heartGameInterval = null;
+        let heartScore = 0;
+        let heartTimeLeft = 30;
+        let hearts = [];
+        let catcherX = 200;
+        let gameRunning = false;
+        const canvas = document.getElementById('heart-game-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function startHeartGame() {
+            heartScore = 0;
+            heartTimeLeft = 30;
+            hearts = [];
+            catcherX = 200;
+            gameRunning = true;
+
+            document.getElementById('heart-score').textContent = '0';
+            document.getElementById('heart-time').textContent = '30';
+
+            canvas.onmousemove = (e) => {
+                const rect = canvas.getBoundingClientRect();
+                catcherX = e.clientX - rect.left - 30;
+                catcherX = Math.max(0, Math.min(canvas.width - 60, catcherX));
+            };
+
+            canvas.ontouchmove = (e) => {
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                catcherX = e.touches[0].clientX - rect.left - 30;
+                catcherX = Math.max(0, Math.min(canvas.width - 60, catcherX));
+            };
+
+            if (heartGameInterval) clearInterval(heartGameInterval);
+
+            heartGameInterval = setInterval(() => {
+                heartTimeLeft--;
+                document.getElementById('heart-time').textContent = heartTimeLeft;
+
+                if (heartTimeLeft <= 0) {
+                    endHeartGame();
+                    return;
+                }
+
+                if (Math.random() < 0.3) {
+                    hearts.push({
+                        x: Math.random() * (canvas.width - 30),
+                        y: -20,
+                        speed: 2 + Math.random() * 2,
+                        emoji: ['❤️', '💕', '💖', '💗'][Math.floor(Math.random() * 4)]
+                    });
+                }
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                hearts.forEach((heart, index) => {
+                    heart.y += heart.speed;
+
+                    ctx.font = '25px Arial';
+                    ctx.fillText(heart.emoji, heart.x, heart.y);
+
+                    if (heart.y > canvas.height) {
+                        hearts.splice(index, 1);
+                    }
+
+                    if (heart.y > canvas.height - 40 &&
+                        heart.y < canvas.height - 10 &&
+                        heart.x > catcherX - 20 &&
+                        heart.x < catcherX + 80) {
+                        heartScore++;
+                        document.getElementById('heart-score').textContent = heartScore;
+                        hearts.splice(index, 1);
+                    }
+                });
+
+                ctx.fillStyle = 'rgba(214, 51, 132, 0.8)';
+                ctx.fillRect(catcherX, canvas.height - 30, 60, 20);
+                ctx.strokeStyle = '#d63384';
+                ctx.strokeRect(catcherX, canvas.height - 30, 60, 20);
+
+            }, 30);
+        }
+
+        function endHeartGame() {
+            clearInterval(heartGameInterval);
+            gameRunning = false;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = '24px "Ma Shan Zheng"';
+            ctx.fillStyle = '#d63384';
+            ctx.textAlign = 'center';
+            ctx.fillText('游戏结束！', canvas.width / 2, canvas.height / 2 - 20);
+            ctx.fillText('得分：' + heartScore, canvas.width / 2, canvas.height / 2 + 20);
+            ctx.fillText('妈妈，我爱您！❤️', canvas.width / 2, canvas.height / 2 + 60);
+        }
+
+        let selectedFlower = '🌷';
+        let flowerCount = 0;
+        const pots = 9;
+
+        function initFlowerGarden() {
+            const area = document.getElementById('flower-area');
+            area.innerHTML = '';
+            flowerCount = 0;
+            document.getElementById('flower-count').textContent = '0';
+
+            for (let i = 0; i < pots; i++) {
+                const pot = document.createElement('div');
+                pot.className = 'flower-pot';
+                pot.onclick = () => plantFlower(pot);
+                area.appendChild(pot);
+            }
+        }
+
+        function selectFlower(flower) {
+            selectedFlower = flower;
+            document.querySelectorAll('.flower-btn').forEach(btn => {
+                btn.style.background = btn.textContent === flower ? 'var(--accent)' : 'white';
+                btn.style.color = btn.textContent === flower ? 'white' : 'var(--accent)';
+            });
+        }
+
+        function plantFlower(pot) {
+            if (pot.querySelector('.flower')) return;
+
+            const flower = document.createElement('div');
+            flower.className = 'flower';
+            flower.textContent = selectedFlower;
+            pot.appendChild(flower);
+
+            flowerCount++;
+            document.getElementById('flower-count').textContent = flowerCount;
+
+            if (flowerCount === pots) {
+                setTimeout(() => {
+                    alert('🌷🌸🌹🌻🌺💐 花园种满啦！\n\n这是送给妈妈的最美花园！\n\n妈妈，我爱您！❤️');
+                }, 500);
+            }
+        }
+
+        function resetGarden() {
+            initFlowerGarden();
+            selectFlower('🌷');
+        }
+
+        function openGame(game) {
+            document.getElementById(game + '-modal').classList.add('active');
+
+            if (game === 'memory') {
+                initMemoryGame();
+            } else if (game === 'flower') {
+                initFlowerGarden();
+                selectFlower('🌷');
+            }
+        }
+
+        function closeGame(game) {
+            document.getElementById(game + '-modal').classList.remove('active');
+
+            if (game === 'heart' && heartGameInterval) {
+                clearInterval(heartGameInterval);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        document.querySelectorAll('.game-modal').forEach(modal => {
+            modal.onclick = (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    if (heartGameInterval) clearInterval(heartGameInterval);
+                }
+            };
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
